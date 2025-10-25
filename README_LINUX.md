@@ -30,7 +30,8 @@ php artisan db:seed
 echo "Iniciando servidor Laravel..."
 php artisan serve
 
-2. Execute no terminal:
+
+# Execute no terminal:
 
 chmod +x setup_linux.sh
 ./setup_linux.sh
