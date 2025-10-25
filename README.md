@@ -52,9 +52,11 @@ php artisan serve
 
 ---
 
-## Passo 1: Clonar o repositório
+## Passo 2: Clonar o repositório
 
 ### Windows
+
+``bash
 
 git clone https://github.com/SEU_USUARIO/NOME_DO_REPO.git
 cd NOME_DO_REPO
