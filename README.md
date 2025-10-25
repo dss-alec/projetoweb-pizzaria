@@ -1,8 +1,17 @@
-# 📌 Guia de Colaboração - Projeto Laravel
+# 🍕 Projeto Pizzaria Laravel
+
+## Sobre o projeto
+
+Este projeto é uma aplicação web para uma pizzaria, desenvolvida em **Laravel**, com funcionalidades para gerenciamento de pedidos, cadastro de produtos e clientes, e interface responsiva.
+
+## Tecnologias utilizadas
+
+- **Backend**: PHP 8 / Laravel
+- **Frontend**: HTML, CSS, JavaScript, Bootstrap
+- **Banco de dados**: MySQL
+- **Gerenciamento de dependências**: Composer e NPM
 
 ## Estrutura do projeto
-
-O projeto contém:
 
 app/
 bootstrap/
@@ -20,54 +29,11 @@ package-lock.json
 README.md
 
 
+## Observações
 
-### O que **não enviar** para o GitHub
+- Nunca compartilhe o arquivo `.env` real.  
+- `vendor/` e `node_modules/` não devem ser enviados ao GitHub.  
+- Siga os guias específicos para Linux ou Windows para configurar o projeto localmente:
 
-- `vendor/` → dependências do PHP  
-- `node_modules/` → dependências do Node.js  
-- `.env` → contém dados sensíveis (senhas, chaves, etc.)
-
-> Essas pastas podem ser recriadas em qualquer máquina usando os comandos abaixo.
-
----
-
-## Passo 1: Clonar o repositório
-
-### Linux / macOS
-
-```bash
-git clone https://github.com/SEU_USUARIO/NOME_DO_REPO.git
-cd NOME_DO_REPO
-
-composer install      # instala dependências do Laravel
-npm install           # instala dependências do frontend
-
-cp .env.example .env
-php artisan key:generate
-
-php artisan migrate
-php artisan db:seed   # opcional, se houver seeds
-
-php artisan serve
-
----
-
-## Passo 2: Clonar o repositório
-
-### Windows
-
-``bash
-
-git clone https://github.com/SEU_USUARIO/NOME_DO_REPO.git
-cd NOME_DO_REPO
-
-composer install
-npm install
-
-copy .env.example .env
-php artisan key:generate
-
-php artisan migrate
-php artisan db:seed   # opcional, se houver seeds
-
-php artisan serve
+  - [Guia Linux](README_LINUX.md)  
+  - [Guia Windows](README_WINDOWS.md)
