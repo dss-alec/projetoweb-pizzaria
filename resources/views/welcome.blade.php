@@ -114,7 +114,6 @@
             height: 300px; 
             margin: 0 auto; 
         }
-
     </style>
 </head>
 
@@ -130,17 +129,27 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Catálogo</a>
+                    <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Catálogo</a>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="{{ route('produtos') }}">Produtos</a></li>
                     <li><a class="dropdown-item" href="{{ route('servicos') }}">Serviços</a></li>
                 </ul>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link text-white" href="{{ route('fale-conosco') }}">Fale conosco</a>
+                    <a class="nav-link text-white" href="{{ route('fale-conosco') }}">Fale conosco</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link text-white" href="{{ route('sobre-nos') }}">Sobre nós</a>
+                    <a class="nav-link text-white" href="{{ route('sobre-nos') }}">Sobre nós</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ route('login') }}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <div class="ms-auto pe-5">
+                        <a href="https://wa.me/556732336821" class="nav-link d-flex align-items-center text-success fw-bold" target="_blank">
+                            <i class="bi bi-whatsapp me-2"></i> Mensagem Instantânea
+                        </a> 
+                    </div>
                 </li>
             </ul>
             </div>
@@ -229,9 +238,10 @@
 <br>
 
 <footer>
-        <p class="contato">Rua das Pizzas, 123 – Bairro Sabores, Corumbá – MS, 01234-567, (11) 98765-4321, contato@pizzariadelicia.com</p>
+        <p class="contato">Rua das Pizzas, 123 – Bairro Sabores, Corumbá – MS, 01234-567, (67) 3233-6821, contato@pizzariadelicia.com</p>
 
         <div class="container text-center">
+
             <h5>Como chegar</h5>
 
             <div id="map-container" class="ratio ratio-16x9">
