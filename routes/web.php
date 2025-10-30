@@ -13,7 +13,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 //Rotas
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::get('/fale-conosco', function () {
     return view('fale-conosco');
