@@ -39,7 +39,7 @@
     </div>
   </section>
 
-<!--LAYOUT FOOTER-->
+  <!--LAYOUT FOOTER-->
   @include('layouts.footer')
 </body>
 </html>
