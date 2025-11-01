@@ -23,10 +23,10 @@
                     
                     
                     <div class="mb-4">
-                        
-                        <a href="#" class="inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700">
-                            Adicionar Novo Produto
+                        <a href="<?php echo e(route('admin.produtos.criar')); ?>" class="inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700">
+                            Criar Produto
                         </a>
+                        
                     </div>
 
                     
@@ -48,13 +48,18 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         
                                         
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Editar</a>
+                                        <a href="<?php echo e(route('admin.produtos.editar', $produto->id)); ?>" class="text-indigo-600 hover:text-indigo-900">
+                                            Editar
+                                        </a>
                                         
                                         
-                                        <form action="#" method="POST" class="inline">
+                                        <form action="<?php echo e(route('admin.produtos.remover', $produto->id)); ?>" method="POST" class="inline">
                                             <?php echo csrf_field(); ?>
                                             <?php echo method_field('DELETE'); ?>
-                                            <button type="submit" class="text-red-600 hover:text-red-900 ml-4">Excluir</button>
+                                            <button type="submit" class="text-red-600 hover:text-red-900 ml-4"
+                                                    onclick="return confirm('Tem certeza que deseja excluir este produto?')">
+                                                Excluir
+                                            </button>
                                         </form>
                                         
                                     </td>

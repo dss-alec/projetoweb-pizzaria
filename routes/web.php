@@ -12,9 +12,7 @@ Route::get('sobre-nos', function() {
     return view('sobre-nos');
 })->name('sobre-nos');
 
-Route::get('produtos', function() {
-    return view('produtos');
-})->name('produtos');
+Route::get('produtos', [ProdutoController::class, 'index'])->name('produtos');
 
 Route::get('servicos', function() {
     return view('servicos');
@@ -38,13 +36,31 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//grupo de rotas do admin
+//grupo de rotas do admin e parao CRUD
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', function () {
         return redirect()->route('admin.cadastro.produtos');
     })->name('dashboard');
 
+    //rota para pagina de cadastro
     Route::get('/cadastro-produtos', [ProdutoController::class, 'paginaDeCadastro'])->name('cadastro.produtos');
+
+    //rota para criar 
+    Route::get('/produtos/criar', [ProdutoController::class, 'create'])->name('produtos.criar');
+
+    //salvar no banco de dados
+    Route::post('/produtos', [ProdutoController::class, 'store'])->name('produtos.store');
+
+    //rota para editar
+    Route::get('/produtos/{produto}/editar', [ProdutoController::class, 'edit'])->name('produtos.editar');
+
+    //salvar no banco de dados
+    Route::put('/produtos/{produto}/atualizar', [ProdutoController::class, 'update'])->name('produtos.atualizar');
+
+    //rota para remover
+    Route::delete('/produtos/{produto}/remover', [ProdutoController::class, 'destroy'])->name('produtos.remover');
 });
+
+
 
 require __DIR__.'/auth.php';
