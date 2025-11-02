@@ -4,69 +4,77 @@ namespace App\Http\Controllers;
 
 use App\Models\Produto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse; 
 
 class ProdutoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function paginaDeCadastro():View{
         $produtos = Produto::all(); //buscando os produtos
         return view('cadastro-produtos', ['produtos' => $produtos]);
-
     }
 
-    public function index()
-    {
-        //
+    public function index(): View{
+        $produtos = Produto::all();
+        return view('produtos', ['produtos' => $produtos]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('admin.produtos.criar');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse 
     {
-        //
+        $request->validate([
+            'nome' => 'required|string|max:255',
+            'descricao' => 'nullable|string',
+            'preco' => 'required|numeric|min:0',
+            'imagem' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        $path = $request->file('imagem')->store('uploads', 'public');
+
+        Produto::create([
+            'nome' => $request->nome,
+            'descricao' => $request->descricao,
+            'preco' => $request->preco,
+            'imagem' => $path,
+        ]);
+
+        return redirect()->route('admin.cadastro.produtos')->with('success', 'Produto cadastrado com sucesso!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Produto $produto)
+
+    public function edit(Produto $produto): View
     {
-        //
+        return view('admin.produtos.editar', ['produto' => $produto]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Produto $produto)
+   
+    public function update(Request $request, Produto $produto): RedirectResponse 
     {
-        //
+        $request->validate([
+            'nome' => 'required|string|max:255',
+            'descricao' => 'nullable|string',
+            'preco' => 'required|numeric|min:0',
+        ]);
+
+        $produto->update([
+            'nome' => $request->nome,
+            'descricao' => $request->descricao,
+            'preco' => $request->preco,
+        ]);
+
+        return redirect()->route('admin.cadastro.produtos')->with('success', 'Produto atualizado com sucesso!');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Produto $produto)
+    public function destroy(Produto $produto): RedirectResponse 
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Produto $produto)
-    {
-        //
+        $produto->delete();
+        
+        return redirect()->route('admin.cadastro.produtos')->with('success', 'Produto excluído com sucesso!');
     }
 }

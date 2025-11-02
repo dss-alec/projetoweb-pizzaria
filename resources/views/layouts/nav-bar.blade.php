@@ -9,14 +9,8 @@
 
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ms-auto align-items-lg-center flex-wrap">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Catálogo
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{{ route('produtos') }}">Produtos</a></li>
-              <li><a class="dropdown-item" href="{{ route('servicos') }}">Serviços</a></li>
-            </ul>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{{ route('produtos') }}">Catálogo de produtos</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-white" href="{{ route('fale-conosco') }}">Fale conosco</a>

@@ -80,7 +80,7 @@
 
     <br><br>
 
-    <!--  COLOCAR AQUI O MENU COM AS PIZZAS  -->
+    <!--  colocar algo aqui -->
    
     <br><br>
 
