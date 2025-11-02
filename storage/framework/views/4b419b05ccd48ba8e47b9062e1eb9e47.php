@@ -22,7 +22,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a href="<?php echo e(route('admin.cadastro.produtos')); ?>" class="nav-link">Cadastro de Produtos</a></li>
-                    <li class="nav-item"><a href="<?php echo e(route('mensagens')); ?>" class="nav-link">Visualizar Mensagens</a></li>
+                    <li class="nav-item"><a href="<?php echo e(route('admin.mensagens')); ?>" class="nav-link">Visualizar Mensagens</a></li>
                     <li class="nav-item">
                         <form action="<?php echo e(route('logout')); ?>" method="POST"><?php echo csrf_field(); ?>
                             <button class="btn btn-outline-light btn-sm ms-2">Sair</button>

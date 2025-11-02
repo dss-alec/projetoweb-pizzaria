@@ -1,8 +1,6 @@
 <x-app-layout>
-    {{-- Cabeçalho da Página --}}
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Cadastro de Produtos') }}
         </h2>
     </x-slot>
 
@@ -11,15 +9,12 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     
-                    {{-- Botão para Adicionar (CORRIGIDO) --}}
                     <div class="mb-4">
                         <a href="{{ route('admin.produtos.criar') }}" class="inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700">
                             Criar Produto
                         </a>
-                        {{-- OS OUTROS BOTÕES FORAM REMOVIDOS DAQUI (eles pertencem à tabela) --}}
                     </div>
 
-                    {{-- Tabela com a Lista --}}
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                             <tr>
@@ -30,19 +25,17 @@
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             
-                            {{-- Loop para mostrar os produtos --}}
                             @forelse ($produtos as $produto)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $produto->nome }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">R$ {{ number_format($produto->preco, 2, ',', '.') }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         
-                                        {{-- Botão Editar (CORRIGIDO) --}}
+    
                                         <a href="{{ route('admin.produtos.editar', $produto->id) }}" class="text-indigo-600 hover:text-indigo-900">
                                             Editar
                                         </a>
                                         
-                                        {{-- Botão Excluir (CORRIGIDO) --}}
                                         <form action="{{ route('admin.produtos.remover', $produto->id) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')

@@ -22,7 +22,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a href="{{ route('admin.cadastro.produtos') }}" class="nav-link">Cadastro de Produtos</a></li>
-                    <li class="nav-item"><a href="{{ route('mensagens') }}" class="nav-link">Visualizar Mensagens</a></li>
+                    <li class="nav-item"><a href="{{ route('admin.mensagens') }}" class="nav-link">Visualizar Mensagens</a></li>
                     <li class="nav-item">
                         <form action="{{ route('logout') }}" method="POST">@csrf
                             <button class="btn btn-outline-light btn-sm ms-2">Sair</button>

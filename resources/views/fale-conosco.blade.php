@@ -1,55 +1,49 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fale Conosco - Pizzaria Delícia</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<div class="container">
+    <h2>Fale Conosco</h2>
 
-  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-</head>
 
-<body>
-  
-  <!--LAYOUT NAV-BAR-->
-  @include('layouts.nav-bar')
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
-  <div class="container" style="max-width: 1050px; margin-top: 6px;">
-    <div class="card p-4 shadow-sm">
-      <h2 class="text-center mb-3">Fale Conosco</h2>
-      <form>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <strong>Opa!</strong> Verifique os campos abaixo:
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form action="{{ route('fale-conosco.store') }}" method="POST">
+        @csrf
+
         <div class="mb-3">
-          <label for="nome" class="form-label">Nome Completo:</label>
-          <input type="text" class="form-control" id="nome" placeholder="Digite seu nome">
+            <label for="nome" class="form-label">Seu Nome:</label>
+            <input type="text" class="form-control" id="nome" name="nome" value="{{ old('nome') }}" required>
         </div>
 
         <div class="mb-3">
-          <label for="email" class="form-label">Email:</label>
-          <input type="email" class="form-control" id="email" placeholder="Digite seu email">
+            <label for="email" class="form-label">Seu Email:</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
         </div>
 
         <div class="mb-3">
-          <label for="telefone" class="form-label">Telefone:</label>
-          <input type="tel" class="form-control" id="telefone" placeholder="Digite seu telefone">
+            <label for="telefone" class="form-label">Seu Telefone:</label>
+            <input type="text" class="form-control" id="telefone" name="telefone" value="{{ old('telefone') }}" required>
         </div>
 
         <div class="mb-3">
-          <label for="mensagem" class="form-label">Mensagem:</label>
-          <textarea class="form-control" id="mensagem" rows="4" placeholder="Escreva sua mensagem"></textarea>
+            <label for="mensagem" class="form-label">Sua Mensagem:</label>
+            <textarea class="form-control" id="mensagem" name="mensagem" rows="5" required>{{ old('mensagem') }}</textarea>
         </div>
 
-        <button type="submit" class="btn w-100" style="background-color: #9c1919; color: white; border: none;">Enviar</button>
-      </form>
-    </div>
-  </div>
-  <br>
+        <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+    </form>
 
-  <!--LAYOUT FOOTER-->
-  @include('layouts.footer')
-</body>
-</html>
+</div>

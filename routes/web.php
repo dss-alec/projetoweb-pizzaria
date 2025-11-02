@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\MensagemController;
 use Illuminate\Support\Facades\Route;
 
+//ROTAS DO USUARIO
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
@@ -22,14 +24,13 @@ Route::get('fale-conosco', function() {
     return view('fale-conosco');
 })->name('fale-conosco');
 
+Route::post('fale-conosco', [MensagemController::class, 'store'])->name('fale-conosco.store');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('mensagens', function() {
-    return view('mensagens');
-})->name('mensagens');
-
+//rota gerada pelo breezer
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -59,6 +60,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     //rota para remover
     Route::delete('/produtos/{produto}/remover', [ProdutoController::class, 'destroy'])->name('produtos.remover');
+
+    //rota para visualizar mensagens
+    Route::get('/visualizar-mensagens', [MensagemController::class, 'visualizacaoMensagens'])->name('mensagens');
+
 });
 
 
