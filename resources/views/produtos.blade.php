@@ -79,9 +79,11 @@
           <div class="col-md-3 d-flex">
             <div class="card w-100 h-100">
 
-<img src="{{ $produto->imagem ? asset('uploads/' . $produto->imagem) : asset('img/default-pizza.jpg') }}" 
+<img src="{{ $produto->imagem ? asset('storage/' . $produto->imagem) : asset('img/default-pizza.jpg') }}" 
      class="card-img-fixed" 
      alt="{{ $produto->nome }}">
+
+
 
 
               <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
