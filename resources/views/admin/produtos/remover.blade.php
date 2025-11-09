@@ -6,7 +6,7 @@
     <title>Remover produto</title>
 </head>
 <body>
-    <form action="{{ route('admin.produtos.remover', $produto->id) }}" method="POST" class="inline">
+    <form action="{{ route('admin.produtos.destroy', $produto->id) }}" method="POST" class="inline">
     @csrf          
     @method('DELETE')
 
