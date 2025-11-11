@@ -44,7 +44,7 @@
 
  <div class="container my-5">
     <div class="mb-4">
-        <a href="{{ route('admin.produtos.criar') }}" 
+        <a href="{{ route('admin.produtos.create') }}" 
            class="btn btn-danger">
             Criar Produto
         </a>
@@ -66,12 +66,12 @@
                     <td>{{ $produto->nome }}</td>
                     <td>R$ {{ number_format($produto->preco, 2, ',', '.') }}</td>
                     <td class="text-end">
-                        <a href="{{ route('admin.produtos.editar', $produto->id) }}" 
+                        <a href="{{ route('admin.produtos.edit', $produto->id) }}" 
                            class="btn btn-sm btn-outline-primary">
                             Editar
                         </a>
 
-                        <form action="{{ route('admin.produtos.remover', $produto->id) }}" 
+                        <form action="{{ route('admin.produtos.destroy', $produto->id) }}" 
                               method="POST" 
                               class="d-inline">
                             @csrf
