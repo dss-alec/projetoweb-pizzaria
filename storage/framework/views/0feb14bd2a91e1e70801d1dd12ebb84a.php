@@ -1,83 +1,142 @@
-<?php if (isset($component)) { $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54 = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54 = $attributes; } ?>
-<?php $component = App\View\Components\AppLayout::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('app-layout'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\App\View\Components\AppLayout::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes([]); ?>
-     <?php $__env->slot('header', null, []); ?> 
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        </h2>
-     <?php $__env->endSlot(); ?>
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    
-                    <div class="mb-4">
-                        <a href="<?php echo e(route('admin.produtos.criar')); ?>" class="inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700">
-                            Criar Produto
-                        </a>
-                    </div>
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Produto - Pizzaria Delícia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nome</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Preço</th>
-                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            
-                            <?php $__empty_1 = true; $__currentLoopData = $produtos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $produto): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap"><?php echo e($produto->nome); ?></td>
-                                    <td class="px-6 py-4 whitespace-nowrap">R$ <?php echo e(number_format($produto->preco, 2, ',', '.')); ?></td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        
-    
-                                        <a href="<?php echo e(route('admin.produtos.editar', $produto->id)); ?>" class="text-indigo-600 hover:text-indigo-900">
-                                            Editar
-                                        </a>
-                                        
-                                        <form action="<?php echo e(route('admin.produtos.remover', $produto->id)); ?>" method="POST" class="inline">
-                                            <?php echo csrf_field(); ?>
-                                            <?php echo method_field('DELETE'); ?>
-                                            <button type="submit" class="text-red-600 hover:text-red-900 ml-4"
-                                                    onclick="return confirm('Tem certeza que deseja excluir este produto?')">
-                                                Excluir
-                                            </button>
-                                        </form>
-                                        
-                                    </td>
-                                </tr>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-                                <tr>
-                                    <td colspan="3" class="px-6 py-4 whitespace-nowrap text-center text-gray-500">
-                                        Nenhum produto cadastrado.
-                                    </td>
-                                </tr>
-                            <?php endif; ?>
+    <link rel="stylesheet" href="<?php echo e(asset('css/style.css')); ?>">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Great+Vibes&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="<?php echo e(asset('css/style.css')); ?>">
+</head>
+<style>
 
-                        </tbody>
-                    </table>
+</style>
+<body>
 
-                </div>
+    <nav class="navbar navbar-expand-lg fixed-top custom-red">
+        <div class="container">
+            <a class="navbar-brand" href="<?php echo e(route('admin.dashboard')); ?>">Painel Administrativo</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a href="<?php echo e(route('admin.cadastro.produtos')); ?>" class="nav-link">Cadastro de Produtos</a></li>
+                    <li class="nav-item"><a href="<?php echo e(route('admin.mensagens')); ?>" class="nav-link">Visualizar Mensagens</a></li>
+                    <li class="nav-item">
+                        <form action="<?php echo e(route('logout')); ?>" method="POST"><?php echo csrf_field(); ?>
+                            <button class="btn btn-outline-light btn-sm ms-2">Sair</button>
+                        </form>
+                    </li>
+                </ul>
             </div>
         </div>
+    </nav>
+
+    
+    <div class="container my-5">
+        <?php echo $__env->yieldContent('content'); ?>
     </div>
- <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>
-<?php $attributes = $__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
-<?php unset($__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>
-<?php $component = $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
-<?php unset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
-<?php endif; ?><?php /**PATH /opt/lampp/htdocs/projetoweb-pizzaria/resources/views/cadastro-produtos.blade.php ENDPATH**/ ?>
+
+</body>
+
+ <div class="container my-5">
+    <div class="mb-4">
+        <a href="<?php echo e(route('admin.produtos.create')); ?>" 
+           class="btn btn-danger">
+            Criar Produto
+        </a>
+    </div>
+
+    <table class="table table-hover align-middle">
+        <thead class="table-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Preço</th>
+                <th scope="col" class="text-end">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $__empty_1 = true; $__currentLoopData = $produtos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $produto): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                <tr>
+                    <th scope="row"><?php echo e($index + 1); ?></th>
+                    <td><?php echo e($produto->nome); ?></td>
+                    <td>R$ <?php echo e(number_format($produto->preco, 2, ',', '.')); ?></td>
+                    <td class="text-end">
+                        <a href="<?php echo e(route('admin.produtos.edit', $produto->id)); ?>" 
+                           class="btn btn-sm btn-outline-primary">
+                            Editar
+                        </a>
+
+                        <form action="<?php echo e(route('admin.produtos.destroy', $produto->id)); ?>" 
+                              method="POST" 
+                              class="d-inline">
+                            <?php echo csrf_field(); ?>
+                            <?php echo method_field('DELETE'); ?>
+                            <button type="submit" 
+                                    class="btn btn-sm btn-outline-danger"
+                                    onclick="return confirm('Tem certeza que deseja excluir este produto?')">
+                                Excluir
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                <tr>
+                    <td colspan="4" class="text-center text-muted">
+                        Nenhum produto cadastrado.
+                    </td>
+                </tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
+</div>
+
+
+<footer style="background-color: #000; color: #fff; padding: 40px 20px;">
+    <div class="container">
+        <div class="row">
+            <!-- Informações da Pizzaria -->
+            <div class="col-md-4 mb-3">
+                <h5>Pizzaria Delícia</h5>
+                <p>Delícias que conquistam corações e paladares!</p>
+                <p><strong>Horário:</strong> Seg-Sex: 17h - 23h <br> Sáb-Dom: 18h - 00h</p>
+                <p><strong>Contato:</strong> (67) 3233-6821</p>
+                <div class="social-icons mt-2">
+                    <a href="https://www.facebook.com" target="_blank" style="color: #3b5998; margin-right: 10px; font-size: 1.5rem;">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+                    <a href="https://www.instagram.com" target="_blank" style="color: #E1306C; margin-right: 10px; font-size: 1.5rem;">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/556732336821" target="_blank" style="color: #25D366; font-size: 1.5rem;">
+                        <i class="bi bi-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mapa -->
+            <div class="col-md-8">
+                <h5>Localização</h5>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3772.493010531053!2d-57.65000459999999!3d-18.9979852!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9387a099558d7d1d%3A0x2ee0c9eeab71d5f0!2sPizzaria%20Fiorella!5e0!3m2!1spt-BR!2sbr!4v1761743130470!5m2!1spt-BR!2sbr"
+                    width="100%" height="250" style="border:0; border-radius:8px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+
+        <hr style="border-color: #444; margin: 20px 0;">
+
+        <!-- Copyright -->
+        <div class="text-center">
+            <p>&copy; 2025 Pizzaria Delícia. Todos os direitos reservados.</p>
+            <p>Alunos: Alec Santos, João Gabriel Massuda, Juan Cardoso e Sandy Mendes</p>
+        </div>
+    </div>
+</footer>
+
+</html>
+<?php /**PATH /opt/lampp/htdocs/projetoweb-pizzaria/resources/views/cadastro-produtos.blade.php ENDPATH**/ ?>
