@@ -10,24 +10,21 @@ use Illuminate\Http\RedirectResponse;
 
 class ProdutoController extends Controller
 {
-
-    public function paginaDeCadastro():View{
-        $produtos = Produto::all(); //buscando os produtos
+    public function paginaDeCadastro(): View {
+        $produtos = Produto::all(); 
         return view('cadastro-produtos', ['produtos' => $produtos]);
     }
 
-    public function index(): View{
+    public function index(): View {
         $produtos = Produto::all();
         return view('produtos', ['produtos' => $produtos]);
     }
 
-    public function create(): View
-    {
+    public function create(): View {
         return view('admin.produtos.criar');
     }
 
-    public function store(Request $request): RedirectResponse 
-    {
+    public function store(Request $request): RedirectResponse {
         $request->validate([
             'nome' => 'required|string|max:255',
             'descricao' => 'nullable|string',
@@ -44,53 +41,47 @@ class ProdutoController extends Controller
             'imagem' => $path,
         ]);
 
-        return redirect()->route('admin.cadastro.produtos')->with('success', 'Produto cadastrado com sucesso!');
+        return redirect()->route('admin.cadastro.produtos')
+                         ->with('success', 'Produto criado com sucesso!');
     }
 
-
-    public function edit(Produto $produto): View
-    {
+    public function edit(Produto $produto): View {
         return view('admin.produtos.editar', ['produto' => $produto]);
     }
 
-   
-    public function update(Request $request, Produto $produto): RedirectResponse 
+    public function update(Request $request, Produto $produto): RedirectResponse {
+        $dadosValidados = $request->validate([
+            'nome' => 'required|string|max:255',
+            'descricao' => 'nullable|string',
+            'preco' => 'required|numeric|min:0',
+            'imagem' => 'nullable|image|mimes:jpg,jpeg,png|max:2048', 
+        ]);
 
-    {
-    $dadosValidados = $request->validate([
-        'nome' => 'required|string|max:255',
-        'descricao' => 'nullable|string',
-        'preco' => 'required|numeric|min:0',
-        'imagem' => 'nullable|image|mimes:jpg,jpeg,png|max:2048', 
-    ]);
+        $caminhoImagem = $produto->imagem; 
 
-    $caminhoImagem = $produto->imagem; 
-
-    if ($request->hasFile('imagem')) {
-        
-        if ($produto->imagem) {
-            Storage::disk('public')->delete($produto->imagem);
+        if ($request->hasFile('imagem')) {
+            if ($produto->imagem) {
+                Storage::disk('public')->delete($produto->imagem);
+            }
+            $caminhoImagem = $request->file('imagem')->store('uploads', 'public');
         }
-        
-        $caminhoImagem = $request->file('imagem')->store('uploads', 'public');
+
+        $produto->update([
+            'nome' => $dadosValidados['nome'],
+            'descricao' => $dadosValidados['descricao'],
+            'preco' => $dadosValidados['preco'],
+            'imagem' => $caminhoImagem, 
+        ]);
+
+        return redirect()->route('admin.cadastro.produtos')
+                         ->with('success', 'Produto atualizado com sucesso!');
     }
 
-   
-    $produto->update([
-        'nome' => $dadosValidados['nome'],
-        'descricao' => $dadosValidados['descricao'],
-        'preco' => $dadosValidados['preco'],
-        'imagem' => $caminhoImagem, // Atualiza o campo da imagem
-    ]);
-
-    return redirect()->route('admin.cadastro.produtos')->with('success', 'Produto atualizado com sucesso!');
-
-    }
-
-    public function destroy(Produto $produto): RedirectResponse 
-    {
+    public function destroy(Produto $produto): RedirectResponse {
         $produto->delete();
-        
-        return redirect()->route('admin.cadastro.produtos')->with('success', 'Produto excluído com sucesso!');
+
+        return redirect()->route('admin.cadastro.produtos')
+                         ->with('success', 'Produto excluído com sucesso!');
     }
 }
+

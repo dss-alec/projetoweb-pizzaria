@@ -4,20 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pizzaria Delicia</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Great+Vibes&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Ícones e Fontes -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">    
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    
+    <!-- Seu CSS customizado (Mantido) -->
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    
+    <!-- CORREÇÃO CSS CRÍTICA: Remove margens indesejadas que causam o espaço em branco -->
+    <style>
+        body {
+            /* Remove margens e padding padrão do body */
+            margin: 0;
+            padding: 0;
+        }
+        /* Garante que o hero-section comece no topo, removendo qualquer margem externa */
+        .hero-section {
+            margin-top: 0 !important; 
+            padding-top: 0 !important;
+        }
+    </style>
 </head>
 
 <body>
     <!-- Header / Navbar -->
     @include('layouts.nav-bar')
-
 
     <!-- Hero Section -->
     <div class="hero-section">
@@ -27,14 +42,19 @@
             <p>Na Pizzaria Delícia, cada fatia é feita com ingredientes frescos, muito amor e aquele toque secreto do nosso chef. Experimente o verdadeiro sabor que conquista corações e paladares!</p>
 
             <div class="hero-buttons">
-                <a href="#" class="btn btn-custom">Peça agora</a>
+                <!-- Botão 'Peça agora' com link direto do WhatsApp (corrigido) -->
+                <a href="https://wa.me/556732336821?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20um%20pedido%20de%20pizza." 
+                   class="btn btn-custom" 
+                   target="_blank">
+                    Peça agora
+                </a>
                 <a href="https://www.facebook.com" target="_blank" class="social-icon">
                     <i class="bi bi-facebook"></i>
                 </a>
                 <a href="https://www.instagram.com" target="_blank" class="social-icon">
                     <i class="bi bi-instagram"></i>
                 </a>
-                <a href="https://www.whatsapp.com" target="_blank" class="social-icon">
+                <a href="https://wa.me/556732336821" target="_blank" class="social-icon">
                     <i class="bi bi-whatsapp"></i>
                 </a>
             </div>
@@ -78,13 +98,11 @@
         </button>
     </div>
 
-    
-
-
-    <br>
 
     <!-- Footer -->
     @include('layouts.footer')
 
+    <!-- Scripts Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
