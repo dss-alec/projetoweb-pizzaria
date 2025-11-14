@@ -55,20 +55,36 @@ class ProdutoController extends Controller
 
    
     public function update(Request $request, Produto $produto): RedirectResponse 
+
     {
-        $request->validate([
-            'nome' => 'required|string|max:255',
-            'descricao' => 'nullable|string',
-            'preco' => 'required|numeric|min:0',
-        ]);
+    $dadosValidados = $request->validate([
+        'nome' => 'required|string|max:255',
+        'descricao' => 'nullable|string',
+        'preco' => 'required|numeric|min:0',
+        'imagem' => 'nullable|image|mimes:jpg,jpeg,png|max:2048', 
+    ]);
 
-        $produto->update([
-            'nome' => $request->nome,
-            'descricao' => $request->descricao,
-            'preco' => $request->preco,
-        ]);
+    $caminhoImagem = $produto->imagem; 
 
-        return redirect()->route('admin.cadastro.produtos')->with('success', 'Produto atualizado com sucesso!');
+    if ($request->hasFile('imagem')) {
+        
+        if ($produto->imagem) {
+            Storage::disk('public')->delete($produto->imagem);
+        }
+        
+        $caminhoImagem = $request->file('imagem')->store('uploads', 'public');
+    }
+
+   
+    $produto->update([
+        'nome' => $dadosValidados['nome'],
+        'descricao' => $dadosValidados['descricao'],
+        'preco' => $dadosValidados['preco'],
+        'imagem' => $caminhoImagem, // Atualiza o campo da imagem
+    ]);
+
+    return redirect()->route('admin.cadastro.produtos')->with('success', 'Produto atualizado com sucesso!');
+
     }
 
     public function destroy(Produto $produto): RedirectResponse 
