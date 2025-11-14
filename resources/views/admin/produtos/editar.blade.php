@@ -26,7 +26,7 @@
                 </div>
             @endif
             
-            <form action="{{ route('admin.produtos.update', $produto->id) }}" method="POST">
+            <form action="{{ route('admin.produtos.update', $produto->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf          
                 @method('PUT')
                 
@@ -45,6 +45,27 @@
                     <input type="number" class="form-control" id="preco" name="preco" value="{{ $produto->preco }}" step="0.01" min="0" required>
                 </div>
 
+                @if ($produto->imagem)
+                    <div class="mb-3">
+                        <label class="form-label">Imagem Atual:</label><br>
+                        <img src="{{ asset('storage/' . $produto->imagem) }}" alt="Imagem do Produto" class="img-thumbnail" style="max-width: 200px;">
+                    </div>
+                @else
+                    <div class="mb-3">
+                        <label class="form-label">Imagem Atual:</label>
+                        <p>Nenhuma imagem cadastrada.</p>
+                    </div>
+                @endif
+
+                <div class="mb-3">
+                    <label for="imagem" class="form-label">
+                        Escolha uma NOVA imagem (deixe em branco para manter a atual)
+                    </label>
+                    <input type="file" class="form-control" id="imagem" name="imagem">
+                    @error('imagem') 
+                        <small class="text-danger">{{ $message }}</small> 
+                    @enderror
+                </div>
                 <button type="submit" class="btn w-100" style="background-color: #9c1919; color: white; border: none;">
                     Salvar Alterações
                 </button>
