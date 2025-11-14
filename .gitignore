@@ -1,0 +1,6 @@
+/.env
+/public/.htaccess
+/storage/
+/vendor/
+/node_modules/
+/storage/
