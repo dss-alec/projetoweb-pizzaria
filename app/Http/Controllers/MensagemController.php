@@ -18,7 +18,7 @@ class MensagemController extends Controller
             'telefone.regex' => 'O telefone deve estar no formato (99) 99999-9999.',
             'telefone.required' => 'O campo telefone é obrigatório.',
             'email.email' => 'Informe um email válido.',
-        )];
+        ]);
 
         Mensagem::create([
             'nome' => $request->nome,
